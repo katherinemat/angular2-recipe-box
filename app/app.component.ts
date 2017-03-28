@@ -17,18 +17,19 @@ import { Component } from '@angular/core';
        <button (click)="editRecipe(currentRecipe)">Edit</button>
       </li>
     </ul>
-    <div>
+    <div *ngIf="selectedRecipe">
       <h3>Edit Recipe</h3>
-       <label>Enter Recipe Name:</label>
-       <input [(ngModel)]="selectedRecipe.name">
-       <label>Enter Recipe Rating (1-5):</label>
-       <br>
-       <input type="radio" [(ngModel)]="selectedRecipe.rating" [value]="1">1<br>
-       <input type="radio" [(ngModel)]="selectedRecipe.rating" [value]="2">2<br>
-       <input type="radio" [(ngModel)]="selectedRecipe.rating" [value]="3">3<br>
-       <input type="radio" [(ngModel)]="selectedRecipe.rating" [value]="4">4<br>
-       <input type="radio" [(ngModel)]="selectedRecipe.rating" [value]="5">5<br>
-     </div>
+      <label>Enter Recipe Name:</label>
+      <input [(ngModel)]="selectedRecipe.name">
+      <label>Enter Recipe Rating (1-5):</label>
+      <br>
+      <input type="radio" [(ngModel)]="selectedRecipe.rating" [value]="1">1<br>
+      <input type="radio" [(ngModel)]="selectedRecipe.rating" [value]="2">2<br>
+      <input type="radio" [(ngModel)]="selectedRecipe.rating" [value]="3">3<br>
+      <input type="radio" [(ngModel)]="selectedRecipe.rating" [value]="4">4<br>
+      <input type="radio" [(ngModel)]="selectedRecipe.rating" [value]="5">5<br>
+      <button (click)="finishedEditing()">Done</button>
+    </div>
   </div>
   `
 })
@@ -41,10 +42,14 @@ export class AppComponent {
     new Recipe('grilled chicken', ['chicken', 'spices'], 'grill the chicken', 4)
   ];
 
-  selectedRecipe: Recipe = this.recipes[0];
+  selectedRecipe = null;
 
   editRecipe(clickedRecipe: Recipe) {
     this.selectedRecipe = clickedRecipe;
+  }
+
+  finishedEditing() {
+    this.selectedRecipe = null;
   }
 
   ratingColor(currentRecipe: Recipe){
