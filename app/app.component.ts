@@ -7,7 +7,13 @@ import { Component } from '@angular/core';
     <h1>Recipe Box</h1>
     <h3>A bunch of good recipes</h3>
     <ul>
-      <li *ngFor="let currentRecipe of recipes">{{currentRecipe.name}}: {{currentRecipe.ingredients}} - {{currentRecipe.instructions}}</li>
+      <li *ngFor="let currentRecipe of recipes">{{currentRecipe.name}} - ingredients:
+        <ul>
+          <li *ngFor="let currentIngredient of currentRecipe.ingredients">
+          {{currentIngredient}}
+          </li>
+        </ul>
+       instructions: {{currentRecipe.instructions}}</li>
     </ul>
   </div>
   `
